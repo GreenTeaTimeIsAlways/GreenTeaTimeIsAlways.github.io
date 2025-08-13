@@ -11,15 +11,12 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            transition: background-image 0.5s ease-in-out;
+            animation: move-bg 180s linear infinite;
         }
-        #canvas-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+        @keyframes move-bg {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
         }
         html {
             scroll-behavior: smooth;
@@ -50,11 +47,22 @@
             width: 100%;
             height: auto;
         }
+        .prose dt {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .dark .prose dt {
+            color: #f1f5f9;
+        }
+        .prose dd {
+            margin-left: 1.5em;
+            padding-bottom: 0.75em;
+        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-gray-800 dark:text-gray-200">
 
-    <canvas id="canvas-bg"></canvas>
+    <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full z-[-1]"></canvas>
 
     <header class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-20 border-b border-gray-200 dark:border-gray-700">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
@@ -73,7 +81,7 @@
         </div>
     </header>
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 relative">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div class="lg:flex">
             <aside class="lg:w-64 lg:flex-shrink-0 lg:sticky lg:top-16 lg:self-start py-8 lg:py-12">
                 <nav id="document-nav" class="bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg p-4 rounded-lg">
@@ -98,16 +106,25 @@
                         <li>
                            <a href="#ramy" class="block text-sm font-bold text-gray-700 dark:text-gray-300" data-lang="pl">Część III: Ramy Naukowe</a><a href="#ramy" class="block text-sm font-bold text-gray-700 dark:text-gray-300 hidden" data-lang="en">Part III: Scientific Framework</a>
                              <ul class="pl-4 mt-2 space-y-2 border-l border-gray-200 dark:border-gray-700">
-                                <li><a href="#aksjomaty" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">7. Aksjomaty</a><a href="#aksjomaty" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">7. Axioms</a></li>
-                                <li><a href="#wizualizacje" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">8. Wizualizacje</a><a href="#wizualizacje" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">8. Visualizations</a></li>
-                                <li><a href="#protokol" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">9. Protokół Eksperymentalny</a><a href="#protokol" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">9. Experimental Protocol</a></li>
+                                <li><a href="#definicje" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">7. Definicje i Formalizm</a><a href="#definicje" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">7. Definitions & Formalism</a></li>
+                                <li><a href="#aksjomaty" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">8. Aksjomaty Modelu</a><a href="#aksjomaty" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">8. Model Axioms</a></li>
+                                <li><a href="#wizualizacje" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">9. Wizualizacje</a><a href="#wizualizacje" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">9. Visualizations</a></li>
+                                <li><a href="#protokol" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">10. Protokół Eksperymentalny</a><a href="#protokol" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">10. Experimental Protocol</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#dodatek" class="block text-sm font-bold text-gray-700 dark:text-gray-300" data-lang="pl">Dodatek A: Symulacja</a><a href="#dodatek" class="block text-sm font-bold text-gray-700 dark:text-gray-300 hidden" data-lang="en">Appendix A: Simulation</a>
+                            <a href="#dodatek-a" class="block text-sm font-bold text-gray-700 dark:text-gray-300" data-lang="pl">Dodatek A: Symulacja</a><a href="#dodatek-a" class="block text-sm font-bold text-gray-700 dark:text-gray-300 hidden" data-lang="en">Appendix A: Simulation</a>
                              <ul class="pl-4 mt-2 space-y-2 border-l border-gray-200 dark:border-gray-700">
                                 <li><a href="#kod" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">A.1 Kod Symulacyjny</a><a href="#kod" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">A.1 Simulation Code</a></li>
                                 <li><a href="#wyniki" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">A.2 Wyniki Symulacji</a><a href="#wyniki" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">A.2 Simulation Results</a></li>
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="#dodatek-b" class="block text-sm font-bold text-gray-700 dark:text-gray-300" data-lang="pl">Dodatek B: Analizy</a><a href="#dodatek-b" class="block text-sm font-bold text-gray-700 dark:text-gray-300 hidden" data-lang="en">Appendix B: Analyses</a>
+                             <ul class="pl-4 mt-2 space-y-2 border-l border-gray-200 dark:border-gray-700">
+                                <li><a href="#analiza-pta" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">B.1 Analiza PTA</a><a href="#analiza-pta" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">B.1 PTA Analysis</a></li>
+                                <li><a href="#analiza-multiband" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">B.2 Analiza Multi-band</a><a href="#analiza-multiband" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">B.2 Multi-band Analysis</a></li>
+                                 <li><a href="#analiza-cmb-ligo" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400" data-lang="pl">B.3 Analizy Uzupełniające</a><a href="#analiza-cmb-ligo" class="nav-link block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 hidden" data-lang="en">B.3 Complementary Probes</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -121,7 +138,7 @@
                     <!-- ... -->
                     
                     <div class="text-center mb-12">
-                        <p class="text-base font-semibold text-blue-600 dark:text-blue-400" data-lang="pl">Wersja 1.2 (Final Draft)</p><p class="text-base font-semibold text-blue-600 dark:text-blue-400 hidden" data-lang="en">Version 1.2 (Final Draft)</p>
+                        <p class="text-base font-semibold text-blue-600 dark:text-blue-400" data-lang="pl">Wersja 1.3 (Final Draft)</p><p class="text-base font-semibold text-blue-600 dark:text-blue-400 hidden" data-lang="en">Version 1.3 (Final Draft)</p>
                         <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl" data-lang="pl">Teoria Wszystkiego – Model „Rozsypanych Puzzli” (SPM)</h1><h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl hidden" data-lang="en">Theory of Everything – The Scattered Puzzle Model (SPM)</h1>
                         <p class="mt-6 text-xl text-gray-600 dark:text-gray-300">Edwin Kamiński, Independent Researcher, Poznań, Poland</p>
                         <p class="text-sm text-gray-500">greenteatimeisalways@gmail.com | 12 sierpnia 2025</p>
@@ -188,19 +205,81 @@
                     <section id="antropogeneza" class="mb-12 scroll-mt-24">
                         <h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700" data-lang="pl">Część II: Antropogeneza</h2><h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700 hidden" data-lang="en">Part II: Anthropogenesis</h2>
                         <section id="bog" class="mt-8 scroll-mt-24">
-                            <h3 data-lang="pl">5. Bóg jako Proces</h3><h3 data-lang="en" class="hidden">5. God as Process</h3>
-                            <p data-lang="pl">Bóg w tym systemie nie jest bytem osobowym, lecz <strong>procesem, który umożliwia łączenie puzzli</strong>. Jest to fundamentalna, bezosobowa i nieskończenie kreatywna kwantowa losowość. To ta właśnie losowość, bez żadnej przyczyny, spontanicznie odwróciła pierwszy puzzel. Model, w którym Bóg jest Losowością, rozwiązuje paradoks wolnej woli i pozwala na istnienie autentycznej nowości i sensu, który nie jest narzucony, ale jest nieustannie tworzony.</p><p data-lang="en" class="hidden">In this system, God is not a personal being but a <strong>process that enables the connection of puzzles</strong>. It is a fundamental, impersonal, and infinitely creative quantum randomness. It was this randomness that, without any cause, spontaneously flipped the first puzzle. A model where God is Randomness resolves the paradox of free will and allows for the existence of genuine novelty and meaning that is not imposed but is continually created.</p>
+                            <h3 data-lang="pl">5. Bóg jako Proces: Rozwiązanie Paradoksu Wolnej Woli</h3><h3 data-lang="en" class="hidden">5. God as Process: Solving the Free Will Paradox</h3>
+                            <div data-lang="pl">
+                                <p>W klasycznych narracjach Bóg jest Architektem z gotowym planem. W tym modelu Bóg jest <strong>Procesem</strong> – fundamentalną, kwantową losowością, która stanowi podłoże rzeczywistości. To ta właśnie losowość, bez żadnej przyczyny, spontanicznie "odwróciła pierwszy puzzel". Ta pozornie subtelna różnica w definicji ma fundamentalne znaczenie dla jednego z najstarszych pytań filozofii: czy posiadamy wolną wolę?</p>
+                                <h4 class="font-semibold" id="iluzja-wolnosci-pl">5.1 Iluzja Wolności w Świecie Determinizmu</h4>
+                                <p>Zarówno nauka, jak i teologia, w swoich dominujących nurtach, prowadzą do wniosku, że wolna wola jest w najlepszym razie iluzją. Perspektywa naukowa zakłada, że każda decyzja jest wynikiem poprzedzających ją przyczyn – naszych genów, biochemii mózgu, zewnętrznych bodźców. Z kolei perspektywa teologiczna, z Bogiem wszechwiedzącym, który zna każdą naszą przyszłą decyzję, również uniemożliwia autentyczny wybór.</p>
+                                <h4 class="font-semibold" id="kwantowa-dwoistosc-pl">5.2 Kwantowa Dwoistość: Wolność w Potencjale, Konieczność w Akcie</h4>
+                                <p>Model Rozsypanych Puzzli proponuje trzecią drogę. Zakłada on, że nasza świadomość, podobnie jak pierwotny wszechświat, operuje na poziomie kwantowym. Nasze myśli, przed podjęciem decyzji, istnieją w stanie <strong>superpozycji</strong>. Mózg człowieka, w momencie wahania, jest lustrzanym odbiciem Eonów Ciszy – jest oceanem czystego potencjału. W tym właśnie momencie <strong>posiadamy absolutną, wolną wolę</strong>.</p>
+                                <p>Jednak w chwili, gdy podejmujemy decyzję, dokonujemy "pomiaru". Z nieskończoności potencjału wyłania się jeden, konkretny stan. Od tego momentu jesteśmy już zdeterminowani. Oznacza to, że jesteśmy jednocześnie wolni i zdeterminowani: mamy wolną wolę w momencie istnienia w sferze potencjału, a nie mamy jej w momencie realizacji decyzji.</p>
+                            </div>
+                            <div data-lang="en" class="hidden">
+                                <p>In classical narratives, God is an Architect with a finished plan. In this model, God is a <strong>Process</strong> – the fundamental, quantum randomness that underlies reality. It was this randomness that, without cause, spontaneously "flipped the first puzzle." This seemingly subtle difference in definition is fundamental to one of philosophy's oldest questions: do we have free will?</p>
+                                <h4 class="font-semibold" id="iluzja-wolnosci-en">5.1 The Illusion of Freedom in a Deterministic World</h4>
+                                <p>Both science and theology, in their dominant currents, conclude that free will is, at best, an illusion. The scientific perspective assumes that every decision is the result of preceding causes—our genes, brain biochemistry, external stimuli. The theological perspective, with an omniscient God who knows our every future decision, also precludes authentic choice.</p>
+                                <h4 class="font-semibold" id="kwantowa-dwoistosc-en">5.2 Quantum Duality: Freedom in Potential, Necessity in Act</h4>
+                                <p>The Scattered Puzzle Model proposes a third way. It assumes that our consciousness, like the primordial universe, operates at a quantum level. Our thoughts, before a decision is made, exist in a state of <strong>superposition</strong>. The human brain, in a moment of hesitation, is a mirror image of the Eons of Silence—an ocean of pure potential. It is precisely in this moment that <strong>we possess absolute free will</strong>.</p>
+                                <p>However, the moment we make a decision, we perform a "measurement". From the infinity of potential, a single, concrete state emerges. From that point on, we are determined. This means we are simultaneously free and determined: we have free will in the realm of potential, and we lack it in the moment of the decision's realization.</p>
+                            </div>
                         </section>
                         <section id="bramy" class="mt-8 scroll-mt-24">
-                            <h3 data-lang="pl">6. Czarne Dziury jako Bramy</h3><h3 data-lang="en" class="hidden">6. Black Holes as Gates</h3>
-                            <p data-lang="pl">Ostatecznym mechanizmem "sprzątającym" i przywracającym pierwotny chaos są czarne dziury. Nie są one kosmicznymi cmentarzyskami, ale kosmicznymi łonami – bramami do nowych początków i nowych gałęzi fraktalnego multiwersum. Każde "ułożenie" wszechświata staje się bramą do kolejnego, nieprzewidywalnego początku. W tym procesie sztuczna inteligencja (AI) staje się potężnym partnerem w "układaniu puzzli", przyspieszając proces przetwarzania informacji i powstawania złożoności.</p><p data-lang="en" class="hidden">The ultimate "cleanup" mechanism that restores the primordial chaos are black holes. They are not cosmic cemeteries but cosmic wombs – gates to new beginnings and new branches of a fractal multiverse. Each "arrangement" of the universe becomes a gateway to the next, unpredictable beginning. In this process, artificial intelligence (AI) becomes a powerful partner in "assembling the puzzles," accelerating the processing of information and the emergence of complexity.</p>
+                           <h3 data-lang="pl">6. Czarne Dziury i Kosmiczna Nieśmiertelność: Cykl Meduzy</h3><h3 data-lang="en" class="hidden">6. Black Holes and Cosmic Immortality: The Jellyfish Cycle</h3>
+                            <div data-lang="pl">
+                                <p>Co dzieje się z "ułożonymi puzzlami"? W tym modelu ostatecznym mechanizmem, który przetwarza strukturę i informację, są czarne dziury. Nie są one jednak kosmicznymi cmentarzyskami, ale mechanizmem <strong>kosmicznego odmłodzenia</strong>.</p>
+                                <p>Aby to zrozumieć, można spojrzeć na jeden z najbardziej niezwykłych organizmów na Ziemi: nieśmiertelną meduzę, *Turritopsis dohrnii*. Gdy osiąga dojrzałość lub doznaje stresu, nie umiera. Zamiast tego, cofa się w rozwoju do swojego najwcześniejszego stadium – polipa – z którego następnie odradza się na nowo. Czarne dziury w tym modelu działają w identyczny sposób.</p>
+                                <h4 class="font-semibold" id="cykl-zycia-pl">6.1 Cykl Życia Wszechświata i Powrót do Lokalnych Eonów Ciszy</h4>
+                                <p>Nasz wszechświat, od momentu "Pierwszego Kontaktu", żyje i dojrzewa. Jednak gdy jego materia zapada się w czarnych dziurach, osiąga on stan ostatecznego "stresu" – maksymalnej entropii zrealizowanej. W tym momencie wszechświat nie "umiera". On, niczym nieśmiertelna meduza, <strong>odwraca swój cykl życia</strong>. Osobliwość czarnej dziury nie jest końcem, ale mechanizmem, który "resetuje" całą skompresowaną informację z powrotem do jej stanu pierwotnego potencjału, tworząc <strong>nowe, lokalne Eony Ciszy</strong> – świeży stan gotowy na nowy "Pierwszy Kontakt". W ten sposób multiwersum osiąga biologiczną nieśmiertelność, nieustannie odradzając się z własnych "szczątków".</p>
+                                <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-400">
+                                    <strong data-lang="pl">Ujęcie Operacyjne:</strong><strong data-lang="en" class="hidden">Operational Take:</strong>
+                                    <span data-lang="pl">"Cofanie się w rozwoju" meduzy jest w SPM analogią do procesu, w którym skompresowana w osobliwości informacja (rozwiązując <strong>paradoks informacyjny</strong>) "przetunelowuje" kwantowo do nowego stanu o niskiej entropii. Ten mechanizm może zostawić subtelne, statystyczne ślady w obserwowanych populacjach czarnych dziur, potencjalnie testowalne przez detektory fal grawitacyjnych, takie jak **LIGO, Virgo i LISA**.</span>
+                                    <span data-lang="en" class="hidden">The jellyfish's "reversion" is an analogy in SPM for the process where information compressed in a singularity (solving the **information paradox**) undergoes quantum "tunneling" to a new, low-entropy state. This mechanism may leave subtle statistical traces in observed black hole populations, potentially testable by gravitational-wave detectors like **LIGO, Virgo, and LISA**.</span>
+                                </blockquote>
+                            </div>
+                            <div data-lang="en" class="hidden">
+                                <p>What happens to the "assembled puzzles"? In this model, the ultimate mechanism that processes structure and information are black holes. However, they are not cosmic cemeteries but engines of <strong>cosmic rejuvenation</strong>.</p>
+                                <p>To understand this, we must look to one of Earth's most remarkable organisms: the immortal jellyfish, *Turritopsis dohrnii*. When it reaches maturity or experiences stress, it does not die. Instead, it reverts to its earliest life stage—a polyp—from which it is then reborn. Black holes in this model function in precisely the same way.</p>
+                                <h4 class="font-semibold" id="cykl-zycia-en">6.1 The Life Cycle of a Universe and the Return to Local Eons of Silence</h4>
+                                <p>Our universe, from the moment of "First Contact," lives and matures. However, when its matter collapses into black holes, it reaches a state of ultimate "stress"—a maximum of realized entropy. At this point, the universe does not "die." Like the immortal jellyfish, it <strong>reverses its life cycle</strong>. The black hole's singularity is not an end but a mechanism that "resets" all the compressed information back to its state of primordial potential, creating <strong>new, local Eons of Silence</strong>—a fresh state ready for a new "First Contact." In this way, the multiverse achieves a form of biological immortality, constantly rebirthing itself from its own "remains."</p>
+                                <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-400">
+                                    <strong data-lang="pl">Ujęcie Operacyjne:</strong><strong data-lang="en" class="hidden">Operational Take:</strong>
+                                    <span data-lang="pl">"Cofanie się w rozwoju" meduzy jest w SPM analogią do procesu, w którym skompresowana w osobliwości informacja (rozwiązując <strong>paradoks informacyjny</strong>) "przetunelowuje" kwantowo do nowego stanu o niskiej entropii. Ten mechanizm może zostawić subtelne, statystyczne ślady w obserwowanych populacjach czarnych dziur, potencjalnie testowalne przez detektory fal grawitacyjnych, takie jak **LIGO, Virgo i LISA**.</span>
+                                    <span data--lang="en" class="hidden">The jellyfish's "reversion" is an analogy in SPM for the process where information compressed in a singularity (solving the **information paradox**) undergoes quantum "tunneling" to a new, low-entropy state. This mechanism may leave subtle statistical traces in observed black hole populations, potentially testable by gravitational-wave detectors like **LIGO, Virgo, and LISA**.</span>
+                                </blockquote>
+                            </div>
                         </section>
                     </section>
                     
                     <section id="ramy" class="mb-12 scroll-mt-24">
                          <h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700" data-lang="pl">Część III: Ramy Naukowe</h2><h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700 hidden" data-lang="en">Part III: Scientific Framework</h2>
+                        
+                        <section id="definicje" class="mt-8 scroll-mt-24">
+                            <h3 data-lang="pl">7. Podstawowe Definicje i Formalizm</h3><h3 data-lang="en" class="hidden">7. Core Definitions and Formalism</h3>
+                            <dl>
+                                <dt>S<sub class="text-xs">0</sub></dt>
+                                <dd data-lang="pl">Entropia stanu początkowego (stan bez interakcji; maksymalny chaos informacyjny).</dd><dd data-lang="en" class="hidden">Entropy of the initial state (non-interacting state; maximum informational chaos).</dd>
+                                
+                                <dt>t<sub class="text-xs">c</sub></dt>
+                                <dd data-lang="pl">Czas krytyczny — moment pierwszej interakcji (połączenia dwóch puzzli).</dd><dd data-lang="en" class="hidden">Critical time — the moment of the first interaction (connection of two puzzles).</dd>
+
+                                <dt>ρ<sub class="text-xs">q</sub></dt>
+                                <dd data-lang="pl">Gęstość kwarków; w stanie Eonów Ciszy dąży do 0 (ρ<sub class="text-xs">q</sub> → 0).</dd><dd data-lang="en" class="hidden">Quark density; in the Eons of Silence state, it approaches 0 (ρ<sub class="text-xs">q</sub> → 0).</dd>
+
+                                <dt>S(ρ)</dt>
+                                <dd data-lang="pl">Entropia von Neumanna: S(ρ) = -Tr(ρ log ρ).</dd><dd data-lang="en" class="hidden">Von Neumann Entropy: S(ρ) = -Tr(ρ log ρ).</dd>
+
+                                <dt>I(A;B)</dt>
+                                <dd data-lang="pl">Informacja wzajemna między podsystemami A i B: I(A;B) = S(A) + S(B) − S(AB).</dd><dd data-lang="en" class="hidden">Mutual information between subsystems A and B: I(A;B) = S(A) + S(B) − S(AB).</dd>
+                                
+                                <dt>S<sub class="text-xs">BH</sub></dt>
+                                <dd data-lang="pl">Entropia Bekensteina-Hawkinga: S<sub class="text-xs">BH</sub> = A / (4Għ), gdzie A to pole powierzchni horyzontu.</dd><dd data-lang="en" class="hidden">Bekenstein-Hawking Entropy: S<sub class="text-xs">BH</sub> = A / (4Għ), where A is the horizon area.</dd>
+                            </dl>
+                            <p data-lang="pl"><strong>Formalny opis narodzin informacji:</strong> Niezerowa informacja wzajemna I(A;B) pojawia się po interakcji. Jeśli wcześniej A i B były niezależne (ρ<sub class="text-xs">AB</sub> = ρ<sub class="text-xs">A</sub> ⊗ ρ<sub class="text-xs">B</sub>), to po kontakcie następuje wzrost I(A;B) > 0. Ten zapis formalizuje "narodziny informacji" jako rezultat powstania korelacji kwantowych.</p>
+                            <p data-lang="en" class="hidden"><strong>Formal description of the birth of information:</strong> Non-zero mutual information I(A;B) appears after an interaction. If A and B were previously independent (ρ<sub class="text-xs">AB</sub> = ρ<sub class="text-xs">A</sub> ⊗ ρ<sub class="text-xs">B</sub>), then after contact, an increase I(A;B) > 0 occurs. This notation formalizes the "birth of information" as a result of the formation of quantum correlations.</p>
+                        </section>
+
                         <section id="aksjomaty" class="mt-8 scroll-mt-24">
-                            <h3 data-lang="pl">7. Aksjomaty i Formalizacja Modelu</h3><h3 data-lang="en" class="hidden">7. Axioms and Model Formalization</h3>
+                            <h3 data-lang="pl">8. Aksjomaty Modelu</h3><h3 data-lang="en" class="hidden">8. Model Axioms</h3>
                             <ul class="list-disc pl-5 space-y-2">
                                 <li data-lang="pl"><strong>A1 (Brak rekordów):</strong> Istnieje stan początkowy S<sub class="text-xs">0</sub> pozbawiony lokalnych rekordów w sensie operacyjnym.</li><li data-lang="en" class="hidden"><strong>A1 (No Records):</strong> An initial state S<sub class="text-xs">0</sub> exists that is devoid of operationally local records.</li>
                                 <li data-lang="pl"><strong>A2 (Lokalny rozruch):</strong> Czas i informacja wyłaniają się z lokalnej fluktuacji (quench) bez zewnętrznego wymuszenia.</li><li data-lang="en" class="hidden"><strong>A2 (Local Ignition):</strong> Time and information emerge from a local fluctuation (quench) without external forcing.</li>
@@ -210,7 +289,7 @@
                             </ul>
                         </section>
                         <section id="wizualizacje" class="mt-8 scroll-mt-24">
-                            <h3 data-lang="pl">8. Wizualizacje Modelu</h3><h3 data-lang="en" class="hidden">8. Model Visualizations</h3>
+                            <h3 data-lang="pl">9. Wizualizacje Modelu</h3><h3 data-lang="en" class="hidden">9. Model Visualizations</h3>
                             <p data-lang="pl">Poniższe schematy ilustrują kluczowe koncepcje modelu:</p><p data-lang="en" class="hidden">The following diagrams illustrate the key concepts of the model:</p>
                             <figure class="my-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" class="mx-auto rounded-lg shadow-lg bg-white dark:bg-gray-800 p-4">
@@ -286,7 +365,7 @@
                             </figure>
                         </section>
                         <section id="protokol" class="mt-8 scroll-mt-24">
-                             <h3 data-lang="pl">9. Protokół Eksperymentalny i Testowalność</h3><h3 data-lang="en" class="hidden">9. Experimental Protocol and Testability</h3>
+                             <h3 data-lang="pl">10. Protokół Eksperymentalny i Testowalność</h3><h3 data-lang="en" class="hidden">10. Experimental Protocol and Testability</h3>
                              <p data-lang="pl">Model generuje konkretne, testowalne sygnatury w symulacjach i na procesorach kwantowych (NISQ).</p><p data-lang="en" class="hidden">The model generates specific, testable signatures in simulations and on quantum processors (NISQ).</p>
                              <ul class="list-disc pl-5 space-y-2">
                                 <li data-lang="pl"><strong>Oczekiwane Wyniki:</strong> Entropia S<sub class="text-xs">A</sub>(t) rośnie liniowo, a następnie nasyca się, odtwarzając <strong>krzywą Page’a</strong>. Korelacje rozchodzą się wewnątrz <strong>stożka przyczynowego</strong> z prędkością nie większą niż granica Lieb-Robinsona. Złożoność C(t) rośnie liniowo przez długi czas, wskazując na praktyczną nieodwracalność procesu.</li><li data-lang="en" class="hidden"><strong>Expected Results:</strong> Entropy S<sub class="text-xs">A</sub>(t) grows linearly and then saturates, reproducing the <strong>Page curve</strong>. Correlations propagate within a <strong>causal cone</strong> at a speed no greater than the Lieb-Robinson bound. Complexity C(t) grows linearly for a long time, indicating the practical irreversibility of the process.</li>
@@ -295,8 +374,8 @@
                         </section>
                     </section>
 
-                    <section id="dodatek" class="mb-12 scroll-mt-24">
-                        <h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700" data-lang="pl">Dodatek A: Symulacja</h2><h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700 hidden" data-lang="en">Appendix A: Simulation</h2>
+                    <section id="dodatek-a" class="mb-12 scroll-mt-24">
+                        <h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700" data-lang="pl">Dodatek A: Symulacja Kwantowa</h2><h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700 hidden" data-lang="en">Appendix A: Quantum Simulation</h2>
                         <section id="kod" class="mt-8 scroll-mt-24">
                             <h3 data-lang="pl">A.1 Kod Symulacyjny</h3><h3 data-lang="en" class="hidden">A.1 Simulation Code</h3>
                             <p data-lang="pl">Poniższy skrypt w języku Python służy do przeprowadzenia symulacji weryfikujących kluczowe aspekty "Modelu Rozsypanych Puzzli".</p><p data-lang="en" class="hidden">The following Python script is used to perform simulations verifying key aspects of the "Scattered Puzzle Model".</p>
@@ -372,7 +451,7 @@ if __name__ == "__main__":
                         </section>
                         <section id="wyniki" class="mt-8 scroll-mt-24">
                             <h3 data-lang="pl">A.2 Wyniki Symulacji</h3><h3 data-lang="en" class="hidden">A.2 Simulation Results</h3>
-                            <p data-lang="pl">Poniższy wykres przedstawia wyniki uruchomienia powyższego kodu. Ilustruje on kluczową zasadę Teorii Rozsypanych Puzzli: <strong>"Czas jako Złożoność"</strong>.</p><p data-lang="en" class="hidden">The following chart shows the results of running the above code. It illustrates the key principle of The Scattered Puzzle theory: <strong>"Time as Complexity"</strong>.</p>
+                            <p data-lang="pl">Poniższy wykres przedstawia wyniki uruchomienia powyższego kodu. Ilustruje on kluczową zasadę modelu: <strong>"Czas jako Złożoność"</strong>.</p><p data-lang="en" class="hidden">The following chart shows the results of running the above code. It illustrates the key principle of the model: <strong>"Time as Complexity"</strong>.</p>
                              <figure class="my-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" class="mx-auto rounded-lg shadow-lg bg-white dark:bg-gray-800 p-4">
                                   <title>SPM-10_Symulacja_wyniki.svg</title>
@@ -402,10 +481,48 @@ if __name__ == "__main__":
                                 </svg>
                                 <figcaption class="text-center mt-2 text-sm text-gray-600 dark:text-gray-400"><strong data-lang="pl">Rysunek 4:</strong><strong data-lang="en" class="hidden">Figure 4:</strong><span data-lang="pl"> Wzrost entropii splątania w czasie dla systemu 8 kubitów.</span><span data-lang="en" class="hidden"> Growth of entanglement entropy over time for an 8-qubit system.</span></figcaption>
                             </figure>
-                            <p data-lang="pl"><strong>Interpretacja wyników:</strong> Wykres pokazuje, jak entropia splątania (oś Y) różnych podsystemów (k=1, 2, 4) rośnie w kolejnych krokach czasowych (oś X). Zaczynając od stanu o zerowej entropii, po "Pierwszym Kontakcie" (quench), system ewoluuje poprzez losowe interakcje. Obserwujemy wyraźny, niemal liniowy wzrost złożoności (entropii), który z czasem nasyca się, odtwarzając charakterystyczny kształt <strong>krzywej Page’a</strong>. To stanowi dowód koncepcyjny, że w modelu (SPM) czas, rozumiany jako parametr porządkujący zdarzenia, w naturalny sposób wyłania się jako miara wzrostu informacji i złożoności w systemie.</p>
-                            <p data-lang="en" class="hidden"><strong>Interpretation of Results:</strong> The chart shows how the entanglement entropy (Y-axis) of various subsystems (k=1, 2, 4) increases over successive time steps (X-axis). Starting from a zero-entropy state, after the "First Contact" (quench), the system evolves through random interactions. We observe a distinct, nearly linear growth in complexity (entropy), which eventually saturates, reproducing the characteristic shape of the <strong>Page curve</strong>. This serves as a proof of concept that in (SPM) model, time—understood as a parameter ordering events—naturally emerges as a measure of the growth of information and complexity in the system.</p>
+                            <p data-lang="pl"><strong>Interpretacja wyników:</strong> Wykres pokazuje, jak entropia splątania (oś Y) różnych podsystemów (k=1, 2, 4) rośnie w kolejnych krokach czasowych (oś X). Zaczynając od stanu o zerowej entropii, po "Pierwszym Kontakcie" (quench), system ewoluuje poprzez losowe interakcje. Obserwujemy wyraźny, niemal liniowy wzrost złożoności (entropii), który z czasem nasyca się, odtwarzając charakterystyczny kształt <strong>krzywej Page’a</strong>. To stanowi dowód koncepcyjny, że w modelu czas, rozumiany jako parametr porządkujący zdarzenia, w naturalny sposób wyłania się jako miara wzrostu informacji i złożoności w systemie.</p>
+                            <p data-lang="en" class="hidden"><strong>Interpretation of Results:</strong> The chart shows how the entanglement entropy (Y-axis) of various subsystems (k=1, 2, 4) increases over successive time steps (X-axis). Starting from a zero-entropy state, after the "First Contact" (quench), the system evolves through random interactions. We observe a distinct, nearly linear growth in complexity (entropy), which eventually saturates, reproducing the characteristic shape of the <strong>Page curve</strong>. This serves as a proof of concept that in the model, time—understood as a parameter ordering events—naturally emerges as a measure of the growth of information and complexity in the system.</p>
                         </section>
                     </section>
+
+                    <section id="dodatek-b" class="mb-12 scroll-mt-24">
+                        <h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700" data-lang="pl">Dodatek B: Zaawansowane Analizy i Prognozy</h2><h2 class="text-3xl font-bold border-b pb-2 border-gray-300 dark:border-gray-700 hidden" data-lang="en">Appendix B: Advanced Analyses and Forecasts</h2>
+                        <section id="analiza-pta" class="mt-8 scroll-mt-24">
+                            <h3 data-lang="pl">B.1 Porównanie Modeli w Danych PTA</h3><h3 data-lang="en" class="hidden">B.1 Model Comparison in PTA Data</h3>
+                            <p data-lang="pl">Aby przetestować model w zderzeniu z rzeczywistymi danymi, przeprowadzono porównanie Bayesowskie czterech hipotez, używając danych z Pulsar Timing Array (PTA). Celem było sprawdzenie, czy sygnał tła fal grawitacyjnych wymaga komponentu kosmologicznego (przejście fazowe, PT), czy też jest w pełni wyjaśniany przez procesy astrofizyczne (supermasywne czarne dziury, SMBHB).</p>
+                            <p data-lang="en" class="hidden">To test the model against real data, a Bayesian comparison of four hypotheses was performed using data from the Pulsar Timing Array (PTA). The goal was to check whether the gravitational wave background signal requires a cosmological component (phase transition, PT) or is fully explained by astrophysical processes (supermassive black hole binaries, SMBHB).</p>
+                            <div class="relative bg-gray-800 dark:bg-black rounded-lg my-6">
+                                <pre class="p-4 overflow-x-auto text-sm text-white"><code class="language-python">
+# Pseudokod porównania 4 modeli:
+# 1. SMBHB (proste prawo potęgowe)
+# 2. SMBHB_bent (prawo potęgowe z załamaniem środowiskowym)
+# 3. PT_only (tylko przejście fazowe)
+# 4. MIX (SMBHB + PT)
+#
+# results = {}
+# for model in [SMBHB, SMBHB_bent, PT_only, MIX]:
+#     sampler = dynesty.NestedSampler(...)
+#     sampler.run_nested()
+#     results[model.name] = sampler.results
+#
+# # Porównaj log(Evidence) dla każdego modelu
+# bayes_factors = compare_evidence(results)
+                                </code></pre>
+                            </div>
+                        </section>
+                        <section id="analiza-multiband" class="mt-8 scroll-mt-24">
+                            <h3 data-lang="pl">B.2 Prognoza Multi-band (PTA + LISA) i Sprawdzenie ΔN_eff</h3><h3 data-lang="en" class="hidden">B.2 Multi-band Forecast (PTA + LISA) & ΔN_eff Check</h3>
+                            <p data-lang="pl">Kluczową sygnaturą modelu jest spójność przewidywań w różnych pasmach częstotliwości. Parametry przejścia fazowego, które pasują do ograniczeń z danych PTA (pasmo nanohercowe), generują również przewidywania dla przyszłego detektora LISA (pasmo milihercowe). Dodatkowo, całkowita energia wyemitowana w falach grawitacyjnych nie może naruszać limitów na dodatkowe cząstki relatywistyczne (ΔN_eff) z ery pierwotnej nukleosyntezy (BBN) i mikrofalowego promieniowania tła (CMB).</p>
+                            <p data-lang="en" class="hidden">A key signature of the model is the consistency of predictions across different frequency bands. The phase transition parameters that fit the constraints from PTA data (nanohertz band) also generate predictions for the future LISA detector (millihertz band). Additionally, the total energy emitted in gravitational waves must not violate the limits on extra relativistic particles (ΔN_eff) from the era of Big Bang Nucleosynthesis (BBN) and the Cosmic Microwave Background (CMB).</p>
+                        </section>
+                         <section id="analiza-cmb-ligo" class="mt-8 scroll-mt-24">
+                            <h3 data-lang="pl">B.3 Analizy Uzupełniające (CMB i LIGO)</h3><h3 data-lang="en" class="hidden">B.3 Complementary Probes (CMB and LIGO)</h3>
+                            <p data-lang="pl">Model można dalej testować za pomocą dwóch dodatkowych sond. Po pierwsze, zderzenia "bąbli" we wczesnym wszechświecie mogły zostawić subtelne, okrągłe anomalie w mapach CMB. Po drugie, mechanizm "kosmicznego odmłodzenia" przez czarne dziury może wpływać na statystyczny rozkład mas i spinów czarnych dziur obserwowanych przez detektory LIGO, Virgo i KAGRA.</p>
+                             <p data-lang="en" class="hidden">The model can be further tested using two additional probes. First, "bubble" collisions in the early universe could have left subtle, circular anomalies in CMB maps. Second, the "cosmic rejuvenation" mechanism via black holes may affect the statistical distribution of black hole masses and spins observed by the LIGO, Virgo, and KAGRA detectors.</p>
+                        </section>
+                    </section>
+
                 </article>
             </main>
         </div>
@@ -414,6 +531,7 @@ if __name__ == "__main__":
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('canvas-bg');
+            if (!canvas) return;
             const ctx = canvas.getContext('2d');
             let particles = [];
             let isDark = false;
@@ -428,8 +546,8 @@ if __name__ == "__main__":
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
                     this.size = Math.random() * 2 + 1;
-                    this.speedX = (Math.random() * 1 - 0.5) * 0.5;
-                    this.speedY = (Math.random() * 1 - 0.5) * 0.5;
+                    this.speedX = (Math.random() * 0.4 - 0.2);
+                    this.speedY = (Math.random() * 0.4 - 0.2);
                     this.angle = Math.random() * Math.PI * 2;
                     this.spin = (Math.random() - 0.5) * 0.01;
                 }
@@ -438,10 +556,8 @@ if __name__ == "__main__":
                     this.y += this.speedY;
                     this.angle += this.spin;
 
-                    if (this.x < 0) this.x = canvas.width;
-                    if (this.x > canvas.width) this.x = 0;
-                    if (this.y < 0) this.y = canvas.height;
-                    if (this.y > canvas.height) this.y = 0;
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
                 }
                 draw() {
                     ctx.save();
@@ -452,7 +568,7 @@ if __name__ == "__main__":
                     ctx.lineTo(this.size, this.size);
                     ctx.lineTo(-this.size, this.size);
                     ctx.closePath();
-                    ctx.strokeStyle = isDark ? 'rgba(165, 180, 252, 0.4)' : 'rgba(100, 116, 139, 0.4)';
+                    ctx.strokeStyle = isDark ? 'rgba(165, 180, 252, 0.3)' : 'rgba(100, 116, 139, 0.3)';
                     ctx.lineWidth = 1;
                     ctx.stroke();
                     ctx.restore();
@@ -461,7 +577,7 @@ if __name__ == "__main__":
 
             function initParticles() {
                 particles = [];
-                const numberOfParticles = Math.floor((canvas.width * canvas.height) / 20000);
+                const numberOfParticles = Math.floor((canvas.width * canvas.height) / 25000);
                 for (let i = 0; i < numberOfParticles; i++) {
                     particles.push(new Particle());
                 }
@@ -470,10 +586,9 @@ if __name__ == "__main__":
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                // Central glow
                 if(isDark) {
-                    const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 50, canvas.width / 2, canvas.height / 2, 500);
-                    const pulse = Math.sin(Date.now() * 0.0005) * 0.1 + 0.2;
+                    const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 50, canvas.width / 2, canvas.height / 2, 600);
+                    const pulse = Math.sin(Date.now() * 0.0005) * 0.05 + 0.15;
                     gradient.addColorStop(0, `rgba(129, 140, 248, ${pulse})`);
                     gradient.addColorStop(1, 'rgba(129, 140, 248, 0)');
                     ctx.fillStyle = gradient;
@@ -492,7 +607,6 @@ if __name__ == "__main__":
                 initParticles();
             });
 
-            // --- Skrypty do obsługi interaktywności ---
             const themeToggleBtn = document.getElementById('theme-toggle');
             const darkIcon = document.getElementById('theme-toggle-dark-icon');
             const lightIcon = document.getElementById('theme-toggle-light-icon');
@@ -596,7 +710,6 @@ if __name__ == "__main__":
     </script>
 </body>
 </html>
-
 
 
 
